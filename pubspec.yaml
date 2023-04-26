@@ -1,0 +1,39 @@
+name: app_horarios
+description: A new Flutter project.
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=2.19.4 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.5
+  connectivity_widget: ^1.0.0
+  connectivity_plus: ^3.0.3
+  connectivity: ^3.0.6
+  fluttertoast: ^8.2.1 
+  animated_text_kit: ^4.2.2 #Es para la animacion de texto
+  animations: ^2.0.7
+  flutter_native_splash: ^2.2.19
+  image_picker: ^0.8.7+3
+  shared_preferences: ^2.1.0
+  backdrop: ^0.8.1
+  convex_bottom_bar: ^3.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter_native_splash:
+  color: "#f7f6f1"
+  color_dark: "#272727"
+  image: assets/images/Palta_achorada.png
+  image_dark: assets/images/Palta_achorada.png
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
