@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 // ignore: depend_on_referenced_packages
 
 import '../settings.dart';
@@ -7,6 +10,7 @@ import '../Data/Activity.dart';
 import '../Data/User.dart';
 
 import '../Widgets/Widgets.dart';
+import 'login_screen.dart';
 
 
 
@@ -21,7 +25,12 @@ class MySchedule extends StatefulWidget {
 class _MySchedule extends State<MySchedule> {
   User user = User();
   ScrollController _controller = ScrollController();
-
+  String user_nombre='Bruno Vallejos';
+  String user_gmail= 'ejemplo@gmail.com';
+  String ruta_user_imagen= 'assets/images/Palta_achorada.png';
+  NetworkImage user_fondo= NetworkImage('https://images6.alphacoders.com/114/1148744.jpg');
+  File? imagen;
+  
   @override
   void initState() {
     super.initState();
@@ -29,8 +38,18 @@ class _MySchedule extends State<MySchedule> {
       user.load();
     });
   }
-  
-  void onDayPressed(int id) {
+  Future<void> _showImagePicker(BuildContext context) async {
+    final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      final image = File(pickedFile.path);
+      // Guarda la imagen en la variable imagen
+      setState(() {
+        imagen = image;
+      });
+    }
+  }
+
+    void onDayPressed(int id) {
     setState(() {
       user.week.indexDay = id;
       user.week.changeDay(id);
@@ -45,6 +64,7 @@ class _MySchedule extends State<MySchedule> {
   
   @override
   Widget build(BuildContext context) {
+    final user_imagen = imagen ?? File('assets/images/Palta_achorada.png');
     _controller = ScrollController(initialScrollOffset: 
         (user.week.indexDay * 110).toDouble() - (MediaQuery.of(context).size.width / 2));
     return DefaultTabController(
@@ -60,9 +80,102 @@ class _MySchedule extends State<MySchedule> {
           color: Settings().barBackGroundButton,
           width: double.infinity,
           child: Column(children: [
-            Text("iniciar sesion"),
-            Text("Descargar PDF"),
-            Text("Descargar Excel"),
+              UserAccountsDrawerHeader(
+              accountName: Text(
+                user_nombre,
+                style: TextStyle(
+                  color: Color.fromARGB(255, 49, 124, 33),
+                  backgroundColor: Color.fromARGB(255, 8, 74, 105)
+                  ),
+                ), 
+              accountEmail: Text(
+                user_gmail,
+                style: TextStyle(
+                  color: Color.fromARGB(255, 49, 124, 33),
+                  backgroundColor: Color.fromARGB(255, 8, 74, 105)
+                  ),
+                ),
+              currentAccountPicture: 
+              CircleAvatar(
+                child: ClipOval(
+                  child: Image.file(
+                    user_imagen,
+                    width: 90,
+                    height: 90,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 26, 51, 28),
+                image: DecorationImage(
+                  image: user_fondo,
+                  fit: BoxFit.cover,
+                )
+              ),
+              otherAccountsPictures: <Widget>[
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.green,
+                    boxShadow: [
+                      BoxShadow(
+                        spreadRadius: 2,
+                        blurRadius: 10,
+                        color: Colors.black.withOpacity(0.1)
+                      )
+                    ]
+                  ),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+                          // Función que se ejecuta al presionar el botón
+                          //showDialogBox();
+                          _showImagePicker(context);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            ListView(
+              children: [
+                ListTile(
+                  leading: Icon(Icons.settings),
+                  title: Text('Ajustes'),
+                  onTap: () => null,
+                ),
+                ListTile(
+                  leading: Icon(Icons.rocket_launch),
+                  title: Text('Grupos'),
+                  onTap: () => null,
+                ),
+                ListTile(
+                  leading: Icon(Icons.token),
+                  title: Text('Compartir ID'),
+                  onTap: () => null,
+                ),
+                ListTile(
+                  leading: Icon(Icons.close),
+                  title: Text('Cerrar Sesión'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                    );
+                  },
+                ),
+                Text("iniciar sesion"),
+                Text("Descargar PDF"),
+                Text("Descargar Excel"),
+              ],
+            ),
+            
             ]),
         ),
         
@@ -138,20 +251,15 @@ class _MySchedule extends State<MySchedule> {
                     Container(child: Text("page3"),),
                   ],
                 ),)
-                
               ),
             ],
           ),
         ),
-        
         bottomNavigationBar: NavigatorBar(),
       ),
     );
   }
-
   // Select style enum from dropdown menu:
-  
-  
 }
 
 class RowData extends StatefulWidget {
