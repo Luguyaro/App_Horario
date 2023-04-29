@@ -170,6 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       HapticFeedback.lightImpact();
                                       Fluttertoast.showToast(
                                         msg: 'Se presiono el boton Ingresar',
+                                        
                                       );
                                     },
                                     child: Container(
@@ -198,25 +199,30 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   SizedBox(height: size.width * .05),
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                                     children: [
-                                      IconButton(
-                                        onPressed: () {
-                                          // Add logic to handle Google login
-                                        },
-                                        icon: Icon(
-                                          FontAwesomeIcons.google,
-                                          color: Colors.white.withOpacity(.8),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                        child: IconButton(
+                                          onPressed: () {
+                                          print("object");  // Add logic to handle Google  login
+                                          },
+                                          icon: Icon(
+                                            FontAwesomeIcons.google,
+                                            color: Colors.white.withOpacity(.8),
+                                          ),
                                         ),
                                       ),
-                                      IconButton(
-                                        onPressed: () {
-                                          // Add logic to handle Facebook login
-                                        },
-                                        icon: Icon(
-                                          FontAwesomeIcons.facebook,
-                                          color: Colors.white.withOpacity(.8),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                        child: IconButton(
+                                          onPressed: () {
+                                            // Add logic to handle Facebook login
+                                          },
+                                          icon: Icon(
+                                            FontAwesomeIcons.facebook,
+                                            color: Colors.white.withOpacity(.8),
+                                          ),
                                         ),
                                       ),
                                     ],
