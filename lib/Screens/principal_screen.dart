@@ -143,38 +143,38 @@ class _MySchedule extends State<MySchedule> {
                 ),
               ],
             ),
-            ListView(
-              children: [
-                ListTile(
-                  leading: Icon(Icons.settings),
-                  title: Text('Ajustes'),
-                  onTap: () => null,
-                ),
-                ListTile(
-                  leading: Icon(Icons.rocket_launch),
-                  title: Text('Grupos'),
-                  onTap: () => null,
-                ),
-                ListTile(
-                  leading: Icon(Icons.token),
-                  title: Text('Compartir ID'),
-                  onTap: () => null,
-                ),
-                ListTile(
-                  leading: Icon(Icons.close),
-                  title: Text('Cerrar Sesión'),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()),
-                    );
-                  },
-                ),
-                Text("iniciar sesion"),
-                Text("Descargar PDF"),
-                Text("Descargar Excel"),
-              ],
-            ),
+              ListView(
+                children: <Widget>[
+                  ListTile(
+                    leading: Icon(Icons.settings),
+                    title: Text('Ajustes'),
+                    onTap: () => null,
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.rocket_launch),
+                    title: Text('Grupos'),
+                    onTap: () => null,
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.token),
+                    title: Text('Compartir ID'),
+                    onTap: () => null,
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.close),
+                    title: Text('Cerrar Sesión'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                      );
+                    },
+                  ),
+                  Text("iniciar sesion"),
+                  Text("Descargar PDF"),
+                  Text("Descargar Excel"),
+                ],
+              )
             
             ]),
         ),
