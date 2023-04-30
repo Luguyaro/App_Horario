@@ -90,12 +90,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                     false,
                                     false,
                                     _nameController,
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Por favor ingrese su nombre';
-                                        }
-                                        return null;
-                                      },
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Por favor ingrese su nombre';
+                                      }
+                                      return null;
+                                    },
                                   ),
                                   component(
                                     Icons.email_outlined,
@@ -103,15 +103,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                     false,
                                     true,
                                     _emailController,
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Por favor ingrese su correo electrónico';
-                                        }
-                                        if (!value.contains('@')) {
-                                          return 'Por favor ingrese un correo electrónico válido';
-                                        }
-                                        return null;
-                                      },
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Por favor ingrese su correo electrónico';
+                                      }
+                                      if (!value.contains('@')) {
+                                        return 'Por favor ingrese un correo electrónico válido';
+                                      }
+                                      return null;
+                                    },
                                   ),
                                   component(
                                     Icons.lock_outline,
@@ -119,15 +119,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                     true,
                                     false,
                                     _passwordController,
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Por favor ingrese su contraseña';
-                                        }
-                                        if (value.length < 6) {
-                                          return 'La contraseña debe tener al menos 6 caracteres';
-                                        }
-                                        return null;
-                                      },
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Por favor ingrese su contraseña';
+                                      }
+                                      if (value.length < 6) {
+                                        return 'La contraseña debe tener al menos 6 caracteres';
+                                      }
+                                      return null;
+                                    },
                                   ),
                                   Row(
                                     mainAxisAlignment:
@@ -170,7 +170,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                       HapticFeedback.lightImpact();
                                       Fluttertoast.showToast(
                                         msg: 'Se presiono el boton Ingresar',
-                                        
                                       );
                                     },
                                     child: Container(
@@ -185,7 +184,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                       child: TextButton(
-                                            onPressed: () {Navigator.pushReplacementNamed(context, '/my_schedule');},
+                                            onPressed: () {
+                                              _handleLogin;
+                                              Navigator.pushReplacementNamed(context, '/my_schedule');},
                                             child: Text('Ingreso', style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.w600,),),
                                           ),
                                     ),
@@ -246,9 +247,18 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
+  void _handleLogin() {
+  if (_formKey.currentState!.validate()) {
+    // El formulario es válido
+    String name = _nameController.text;
+    String email = _emailController.text;
+    String password = _passwordController.text;
+    // aquí puede hacer algo con los datos
+  }
+}
   Widget component(
-      IconData icon, String hintText, bool isPassword, bool isEmail, TextEditingController controller, {required String? Function(dynamic value) validator}) {
+      IconData icon, String hintText, bool isPassword, bool isEmail, TextEditingController controller, 
+      {required String? Function(dynamic value) validator, bool submitted = false}) {
 
     Size size = MediaQuery.of(context).size;
     
@@ -282,11 +292,13 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         controller: controller,
         validator: validator,
+        autovalidateMode: submitted
+          ? AutovalidateMode.onUserInteraction
+          : AutovalidateMode.disabled,
       ),
     );
   }
 }
-
 
 
 class MyBehavior extends ScrollBehavior {

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "709860193066",
+    "project_id": "yasora-480b9",
+    "storage_bucket": "yasora-480b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:709860193066:android:99e6766dd568a5e1e76453",
+        "android_client_info": {
+          "package_name": "com.example.app_horarios"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "709860193066-gn1cs4hib5nmdqptkhm400t4qlfjfpkd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbe4lh8wMWz6B-klZtm3TQv5Oqm6xV1yo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "709860193066-gn1cs4hib5nmdqptkhm400t4qlfjfpkd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
